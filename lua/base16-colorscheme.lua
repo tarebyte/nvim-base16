@@ -198,6 +198,7 @@ function M.setup(colors)
     hi.TSPunctBracket       = { guifg = M.colors.base0C, guibg = nil, gui = NONE,            guisp = nil }
     hi.TSPunctSpecial       = { guifg = M.colors.base0F, guibg = nil, gui = NONE,            guisp = nil }
     hi.TSRepeat             = { guifg = M.colors.base0A, guibg = nil, gui = NONE,            guisp = nil }
+    hi.TSSymbol             = { guifg = M.colors.base0B, guibg = nil, gui = NONE,            guisp = nil }
     hi.TSString             = { guifg = M.colors.base0B, guibg = nil, gui = NONE,            guisp = nil }
     hi.TSStringRegex        = { guifg = M.colors.base0B, guibg = nil, gui = NONE,            guisp = nil }
     hi.TSStringEscape       = { guifg = M.colors.base0C, guibg = nil, gui = NONE,            guisp = nil }
