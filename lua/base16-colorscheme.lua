@@ -4,7 +4,12 @@
 -- https://color.adobe.com/create/color-wheel
 -- http://vrl.cs.brown.edu/color
 
-local M = {}
+local M = {
+    ERROR_ICON   = '',
+    WARNING_ICON = '',
+    INFO_ICON    = '',
+    HINT_ICON    = '',
+}
 
 -- This is a bit of syntactic sugar for creating highlight groups.
 --
@@ -279,26 +284,36 @@ function M.setup(colors)
 
     hi.TreesitterContext = { guifg = nil, guibg = M.colors.base01, gui = 'italic', guisp = nil }
 
-    -- highlight NotifyERRORBorder guifg=#8A1F1F
-    -- highlight NotifyWARNBorder guifg=#79491D
-    -- highlight NotifyINFOBorder guifg=#4F6752
-    -- highlight NotifyDEBUGBorder guifg=#8B8B8B
-    -- highlight NotifyTRACEBorder guifg=#4F3552
-    -- highlight NotifyERRORIcon guifg=#F70067
-    -- highlight NotifyWARNIcon guifg=#F79000
-    -- highlight NotifyINFOIcon guifg=#A9FF68
-    -- highlight NotifyDEBUGIcon guifg=#8B8B8B
-    -- highlight NotifyTRACEIcon guifg=#D484FF
-    -- highlight NotifyERRORTitle  guifg=#F70067
-    -- highlight NotifyWARNTitle guifg=#F79000
-    -- highlight NotifyINFOTitle guifg=#A9FF68
-    -- highlight NotifyDEBUGTitle  guifg=#8B8B8B
-    -- highlight NotifyTRACETitle  guifg=#D484FF
-    -- highlight link NotifyERRORBody Normal
-    -- highlight link NotifyWARNBody Normal
-    -- highlight link NotifyINFOBody Normal
-    -- highlight link NotifyDEBUGBody Normal
-    -- highlight link NotifyTRACEBody Normal
+    hi.TelescopeBorder       = { guifg = M.colors.base01, guibg = M.colors.base01, gui = nil, guisp = nil }
+    hi.TelescopePromptBorder = { guifg = M.colors.base03, guibg = M.colors.base03, gui = nil, guisp = nil }
+    hi.TelescopePromptNormal = { guifg = M.colors.base05, guibg = M.colors.base03, gui = nil, guisp = nil }
+    hi.TelescopePromptPrefix = { guifg = M.colors.base08, guibg = M.colors.base03, gui = nil, guisp = nil }
+    hi.TelescopeNormal       = { guifg = nil,             guibg = M.colors.base01, gui = nil, guisp = nil }
+    hi.TelescopePreviewTitle = { guifg = M.colors.base02, guibg = M.colors.base0B, gui = nil, guisp = nil }
+    hi.TelescopePromptTitle  = { guifg = M.colors.base02, guibg = M.colors.base08, gui = nil, guisp = nil }
+    hi.TelescopeResultsTitle = { guifg = M.colors.base01, guibg = M.colors.base01, gui = nil, guisp = nil }
+    hi.TelescopeSelection    = { guifg = nil,             guibg = M.colors.base03, gui = nil, guisp = nil }
+
+    hi.NotifyERRORBorder = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyWARNBorder  = { guifg = M.colors.base0E, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyINFOBorder  = { guifg = M.colors.base05, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyDEBUGBorder = { guifg = M.colors.base0C, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyTRACEBorder = { guifg = M.colors.base0C, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyERRORIcon   = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyWARNIcon    = { guifg = M.colors.base0E, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyINFOIcon    = { guifg = M.colors.base05, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyDEBUGIcon   = { guifg = M.colors.base0C, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyTRACEIcon   = { guifg = M.colors.base0C, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyERRORTitle  = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyWARNTitle   = { guifg = M.colors.base0E, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyINFOTitle   = { guifg = M.colors.base05, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyDEBUGTitle  = { guifg = M.colors.base0C, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyTRACETitle  = { guifg = M.colors.base0C, guibg = nil, gui = 'none', guisp = nil }
+    hi.NotifyERRORBody = 'Normal'
+    hi.NotifyWARNBody  = 'Normal'
+    hi.NotifyINFOBody  = 'Normal'
+    hi.NotifyDEBUGBody = 'Normal'
+    hi.NotifyTRACEBody = 'Normal'
 
     vim.g.terminal_color_0  = M.colors.base00
     vim.g.terminal_color_1  = M.colors.base08
@@ -316,6 +331,11 @@ function M.setup(colors)
     vim.g.terminal_color_13 = M.colors.base0E
     vim.g.terminal_color_14 = M.colors.base0C
     vim.g.terminal_color_15 = M.colors.base07
+
+    vim.cmd(string.format('sign define DiagnosticSignError text=%s   texthl=DiagnosticSignError linehl= numhl=', M.ERROR_ICON))
+    vim.cmd(string.format('sign define DiagnosticSignWarn  text=%s   texthl=DiagnosticSignWarn  linehl= numhl=', M.WARNING_ICON))
+    vim.cmd(string.format('sign define DiagnosticSignInfo  text=%s   texthl=DiagnosticSignInfo  linehl= numhl=', M.INFO_ICON))
+    vim.cmd(string.format('sign define DiagnosticSignHint  text=%s   texthl=DiagnosticSignHint  linehl= numhl=', M.HINT_ICON))
 end
 
 function M.available_colorschemes()
